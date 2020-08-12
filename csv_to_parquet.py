@@ -8,6 +8,7 @@ import pyarrow as pa
 import pyarrow.csv as pv
 import pyarrow.parquet as pq
 
+from datetime import datetime
 from PIL import Image, UnidentifiedImageError
 from io import BytesIO
 
@@ -101,12 +102,14 @@ def parse_product_catalog(dataset, columns):
     return count, dataframes
 
 def write_datasets(data, output_dir='outputs', name='product_catalog'):
+    today = datetime.now().strftime('%Y%m%d')
+
     if not os.path.exists(output_dir):
         os.mkdir(output_dir)
 
     # Write both files
     for product_type, table in data.items():
-        filename = f"{output_dir}/{name}_{product_type}.parquet"
+        filename = f"{output_dir}/{name}_{product_type}_{today}.parquet"
 
         # Overwrite file if necessary
         if os.path.exists(filename):
