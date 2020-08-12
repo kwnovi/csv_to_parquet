@@ -11,7 +11,8 @@ We suppose there is a new dataset everyday. The script will output two parquet f
 
 #### Usage
 	python csv_to_parquet.py -f inputs/product_catalog.csv
-	
+ 
+
 #### Benchmark
 
 The inital product dataset was concatenated to test the overwall script performance.
@@ -29,11 +30,14 @@ The inital product dataset was concatenated to test the overwall script performa
 	product_catalog_2m.csv (~2m products)
 	Execution time : 1min45s
 
- 
+
+I could not add `product_catalog_200k.csv` and  `product_catalog_2m.csv` to the GIT repository because of GitHub's file size limit but the `test.py` script can generate fake data on the fly.
+
 #### Testing
 
 I wrote two tests to ensure image validation and the overwall execution time of the script. More tests could be written (to check data type for instance) 
 
+	
 #### Scalability
 
 Another solution could have been to directly use PySpark to ingest the CSV file, do the checks and write the parquet files. We could have then created a dedicated Dataproc cluster for the script. In the end, a DAG on Airflow would trigger a Dataproc cluster and the script everyday.
